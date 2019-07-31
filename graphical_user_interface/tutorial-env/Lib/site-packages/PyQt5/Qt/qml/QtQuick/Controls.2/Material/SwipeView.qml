@@ -34,8 +34,9 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.9
-import QtQuick.Templates 2.2 as T
+import QtQuick 2.11
+import QtQuick.Templates 2.4 as T
+import QtQuick.Controls.Material 2.4
 
 T.SwipeView {
     id: control
@@ -59,5 +60,6 @@ T.SwipeView {
         preferredHighlightBegin: 0
         preferredHighlightEnd: 0
         highlightMoveDuration: 250
+        maximumFlickVelocity: 4 * (control.orientation === Qt.Horizontal ? width : height)
     }
 }

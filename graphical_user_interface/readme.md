@@ -34,3 +34,11 @@ We need to add some rule in **.vscode folder/settings.json**, input following be
             "python.pythonPath": "tutorial-env\\Scripts\\python.exe",
             "python.linting.pylintArgs": ["--extension-pkg-whitelist=PyQt5"]  // Added rule
         }
+
+## Qt GUI Design Tool
+In PyQt5, there sparate the GUI Design Tool from PyQt5. If you want to design GUI more easily, follow below command to install GUI Design Tool:
+
+    pip install pyqt5-tools
+
+Open the tool from **project-env\Lib\site-packages\pyqt5-tools\designer.exe**
+

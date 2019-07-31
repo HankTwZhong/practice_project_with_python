@@ -34,10 +34,12 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.9
-import QtQuick.Templates 2.2 as T
-import QtQuick.Controls.Material 2.2
-import QtQuick.Controls.Material.impl 2.2
+import QtQuick 2.11
+import QtQuick.Templates 2.4 as T
+import QtQuick.Controls 2.4
+import QtQuick.Controls.impl 2.4
+import QtQuick.Controls.Material 2.4
+import QtQuick.Controls.Material.impl 2.4
 
 T.ToolButton {
     id: control
@@ -49,22 +51,29 @@ T.ToolButton {
     baselineOffset: contentItem.y + contentItem.baselineOffset
 
     padding: 6
+    spacing: 6
 
-    contentItem: Text {
+    icon.width: 24
+    icon.height: 24
+    icon.color: !enabled ? Material.hintTextColor : checked || highlighted ? Material.accent : Material.foreground
+
+    contentItem: IconLabel {
+        spacing: control.spacing
+        mirrored: control.mirrored
+        display: control.display
+
+        icon: control.icon
         text: control.text
         font: control.font
         color: !control.enabled ? control.Material.hintTextColor :
                 control.checked || control.highlighted ? control.Material.accent : control.Material.foreground
-        elide: Text.ElideRight
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
     }
 
     background: Ripple {
         implicitWidth: 48
         implicitHeight: 48
 
-        readonly property bool square: control.contentItem.implicitWidth <= control.contentItem.implicitHeight
+        readonly property bool square: control.contentItem.width <= control.contentItem.height
 
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2

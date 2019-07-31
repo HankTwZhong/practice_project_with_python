@@ -34,11 +34,12 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.9
+import QtQuick 2.11
 import QtQuick.Window 2.3
-import QtQuick.Controls 2.2
-import QtQuick.Templates 2.2 as T
-import QtQuick.Controls.Universal 2.2
+import QtQuick.Controls 2.4
+import QtQuick.Controls.impl 2.4
+import QtQuick.Templates 2.4 as T
+import QtQuick.Controls.Universal 2.4
 
 T.ComboBox {
     id: control
@@ -62,12 +63,11 @@ T.ComboBox {
         hoverEnabled: control.hoverEnabled
     }
 
-    indicator: Image {
+    indicator: ColorImage {
         x: control.mirrored ? control.padding : control.width - width - control.padding
         y: control.topPadding + (control.availableHeight - height) / 2
-        source: "image://universal/downarrow/" + (!control.enabled ? control.Universal.baseLowColor : control.Universal.baseMediumHighColor)
-        sourceSize.width: width
-        sourceSize.height: height
+        color: !control.enabled ? control.Universal.baseLowColor : control.Universal.baseMediumHighColor
+        source: "qrc:/qt-project.org/imports/QtQuick/Controls.2/Universal/images/downarrow.png"
 
         Rectangle {
             z: -1
@@ -91,7 +91,7 @@ T.ComboBox {
 
         enabled: control.editable
         autoScroll: control.editable
-        readOnly: control.popup.visible
+        readOnly: control.down
         inputMethodHints: control.inputMethodHints
         validator: control.validator
 
@@ -100,7 +100,6 @@ T.ComboBox {
                 control.editable && control.activeFocus ? control.Universal.chromeBlackHighColor : control.Universal.foreground
         selectionColor: control.Universal.accent
         selectedTextColor: control.Universal.chromeWhiteColor
-        horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
     }
 
@@ -111,7 +110,7 @@ T.ComboBox {
         border.width: control.flat ? 0 : 2 // ComboBoxBorderThemeThickness
         border.color: !control.enabled ? control.Universal.baseLowColor :
                        control.editable && control.activeFocus ? control.Universal.accent :
-                       control.down || popup.visible ? control.Universal.baseMediumLowColor :
+                       control.down ? control.Universal.baseMediumLowColor :
                        control.hovered ? control.Universal.baseMediumColor : control.Universal.baseMediumLowColor
         color: !control.enabled ? control.Universal.baseLowColor :
                 control.down ? control.Universal.listMediumColor :
@@ -143,9 +142,8 @@ T.ComboBox {
         contentItem: ListView {
             clip: true
             implicitHeight: contentHeight
-            model: control.popup.visible ? control.delegateModel : null
+            model: control.delegateModel
             currentIndex: control.highlightedIndex
-            highlightRangeMode: ListView.ApplyRange
             highlightMoveDuration: 0
 
             T.ScrollIndicator.vertical: ScrollIndicator { }

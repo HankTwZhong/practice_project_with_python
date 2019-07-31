@@ -34,9 +34,11 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.9
-import QtQuick.Templates 2.2 as T
-import QtQuick.Controls.Universal 2.2
+import QtQuick 2.11
+import QtQuick.Templates 2.4 as T
+import QtQuick.Controls 2.4
+import QtQuick.Controls.impl 2.4
+import QtQuick.Controls.Universal 2.4
 
 T.SpinBox {
     id: control
@@ -67,7 +69,7 @@ T.SpinBox {
     }
 
     contentItem: TextInput {
-        text: control.textFromValue(control.value, control.locale)
+        text: control.displayText
 
         font: control.font
         color: !enabled ? control.Universal.chromeDisabledLowColor :
@@ -99,14 +101,12 @@ T.SpinBox {
             opacity: control.activeFocus && !control.up.pressed ? 0.4 : 1.0
         }
 
-        Image {
+        ColorImage {
             x: (parent.width - width) / 2
             y: (parent.height - height) / 2
-            source: "image://universal/" + (control.mirrored ? "left" : "right") + "arrow/"
-                    + (!enabled ? control.Universal.chromeDisabledLowColor :
-                                  control.activeFocus ? control.Universal.chromeBlackHighColor : control.Universal.baseHighColor)
-            sourceSize.width: width
-            sourceSize.height: height
+            color: !enabled ? control.Universal.chromeDisabledLowColor :
+                              control.activeFocus ? control.Universal.chromeBlackHighColor : control.Universal.baseHighColor
+            source: "qrc:/qt-project.org/imports/QtQuick/Controls.2/Universal/images/" + (control.mirrored ? "left" : "right") + "arrow.png"
         }
     }
 
@@ -127,14 +127,12 @@ T.SpinBox {
             opacity: control.activeFocus && !control.down.pressed ? 0.4 : 1.0
         }
 
-        Image {
+        ColorImage {
             x: (parent.width - width) / 2
             y: (parent.height - height) / 2
-            source: "image://universal/" + (control.mirrored ? "right" : "left") + "arrow/"
-                    + (!enabled ? control.Universal.chromeDisabledLowColor :
-                                  control.activeFocus ? control.Universal.chromeBlackHighColor : control.Universal.baseHighColor)
-            sourceSize.width: width
-            sourceSize.height: height
+            color: !enabled ? control.Universal.chromeDisabledLowColor :
+                              control.activeFocus ? control.Universal.chromeBlackHighColor : control.Universal.baseHighColor
+            source: "qrc:/qt-project.org/imports/QtQuick/Controls.2/Universal/images/" + (control.mirrored ? "right" : "left") + "arrow.png"
         }
     }
 
