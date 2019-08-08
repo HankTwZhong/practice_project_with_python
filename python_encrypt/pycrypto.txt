@@ -1,0 +1,5 @@
+1. install build tools (2017 version that contain VS C++ 14.00)
+  1.2  pip install -U steem (進行更新)
+2. open x86_x64 Cross-Tools Command Prompt for VS 2017
+3. set CL=-FI"%VCINSTALLDIR%Tools\MSVC\14.11.25503\include\stdint.h" (版本會因為步驟1的安裝變動，可至C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC 是查閱版本)
+4. pip install pycrypto
