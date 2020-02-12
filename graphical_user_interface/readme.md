@@ -4,11 +4,11 @@ Because we do not want to influence the local system python pip library version,
 
 Open poject folder with shell, and follow below command to create the project virtual environment:
 
-    $projectpath: python -m venv project-env
+    $projectpath: python -m venv tutorial-env
 
 Next, for windows 10, follow below command to switch the environment:
 
-    $projectpath: project-env\Script\activate.bat
+    $projectpath: tutorial-env\Script\activate.bat
 
 Other OS command to swich the environment, please go to [pyQt5 tutorial page](https://build-system.fman.io/pyqt5-tutorial)
 
